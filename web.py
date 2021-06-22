@@ -39,7 +39,7 @@ def index():
 
 @app.route('/Garage', methods=['GET', 'POST'])
 def Garage():
-        name = request.form['garagecode']
+        #name = request.form['garagecode']
         GPIO.output(7, GPIO.LOW)
         time.sleep(1)
         GPIO.output(7, GPIO.HIGH)
