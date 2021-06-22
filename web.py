@@ -5,8 +5,8 @@ from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)  # the pin numbers refer to the board connector not the chip
 GPIO.setwarnings(False)
-#GPIO.setup(16, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
-#GPIO.setup(18, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
+GPIO.setup(16, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
+GPIO.setup(18, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
 GPIO.setup(7, GPIO.OUT)
 GPIO.output(7, GPIO.HIGH)
 #GPIO.setup(11, GPIO.OUT)
@@ -40,11 +40,17 @@ def index():
 @app.route('/Garage', methods=['GET', 'POST'])
 def Garage():
         name = request.form['garagecode']
+        GPIO.output(7, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(7, GPIO.HIGH)
+        time.sleep(2)
+        return app.send_static_file('Open.html')
         if name == '12345678':  # 12345678 is the Password that Opens Garage Door (Code if Password is Correct)
                 GPIO.output(7, GPIO.LOW)
                 time.sleep(1)
                 GPIO.output(7, GPIO.HIGH)
                 time.sleep(2)
+                return app.send_static_file('Open.html')
                 """
                 if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
                   print("Garage is Opening/Closing")
