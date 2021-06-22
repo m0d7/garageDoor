@@ -37,9 +37,9 @@ def index():
                    return app.send_static_file('Open.html')
         """
 
-@app.route('/Garage', methods=['GET', 'POST'])
-def Garage():
-        #name = request.form['garagecode']
+@app.route('/Gates', methods=['GET', 'POST'])
+def Gates():
+        #name = request.form['gatescode']
         GPIO.output(7, GPIO.LOW)
         time.sleep(1)
         GPIO.output(7, GPIO.HIGH)
