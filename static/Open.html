@@ -105,13 +105,15 @@
         
         <div class="footer">
         </div>
-    </div>    <script>        // Gate control function
+    </div>
+
+    <script>        // Gate control function
         document.getElementById('gateButton').addEventListener('click', function() {
             // Visual feedback when clicked
             this.style.transform = 'scale(0.95)';
             
             // Send AJAX request
-            fetch('/Gates', {
+            fetch('/Gates/control', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
