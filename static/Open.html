@@ -107,13 +107,14 @@
         </div>
     </div>
 
-    <script>        // Gate control function
+    <script>
+        // Gate control function
         document.getElementById('gateButton').addEventListener('click', function() {
             // Visual feedback when clicked
             this.style.transform = 'scale(0.95)';
             
             // Send AJAX request
-            fetch('/Gates/control', {
+            fetch('/Gates', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
