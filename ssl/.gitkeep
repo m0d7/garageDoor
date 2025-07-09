@@ -1,0 +1,2 @@
+# This directory will contain SSL certificates for HTTPS support
+# Run generate_certs.py to create the certificates
