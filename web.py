@@ -20,7 +20,13 @@ GPIO.output(7, GPIO.HIGH)
 app = Flask(__name__)
 
 # Add a route to handle both HTTP and HTTPS requests
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
+def root():
+        # Redirect root to /Gates
+        from flask import redirect
+        return redirect('/Gates')
+
+@app.route('/Gates', methods=['GET'])
 def index():
         # This commented out block checks the status of two GPIO pins
         # to determine if the garage is open, closed, or in between.
