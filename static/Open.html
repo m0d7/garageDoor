@@ -1,15 +1,126 @@
-<html><head>
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vartų Valdymas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --hover-color: #45a049;
+            --text-color: #ffffff;
+            --background-color: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .door-status {
+            margin-bottom: 30px;
+        }
+        
+        .status-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .control-button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            font-size: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+        
+        .control-button:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button-label {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #888;
+        }
 
+        @media (max-width: 480px) {
+            .control-button {
+                width: 150px;
+                height: 150px;
+                font-size: 50px;
+            }
+            
+            .status-text {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
-<body>
-<center>
-<br>
-<form action="/Gates" method="post" id="gatesform">
-<!-- <input id="gatescode" name="gatescode" type="text "pattern="[0-9]*" value="" STYLE="background-color:white;"> -->
-</form>
-<img src="/images/GarageGreen.gif" width="90%" onclick="document.forms['gatesform'].submit();">
-<!-- <br><br><a href="/Log">Click for Log File</a><br><br> -->
-</center>
-</body></html>
+<body>    <div class="container">
+        <div class="door-status">
+            <div class="status-text">Vartų Valdymas</div>
+        </div>
+        
+        <form action="/Gates" method="post" id="gatesform">
+            <!-- Hidden form for submission -->
+        </form>
+        
+        <button class="control-button" onclick="document.forms['gatesform'].submit();">
+            <i class="fas fa-garage-open"></i>
+        </button>
+        
+        <div class="button-label">Paspauskite, kad aktyvuotumėte vartus</div>
+        
+        <div class="footer">
+        </div>
+    </div>
+
+    <script>
+        // Add touch feedback
+        document.querySelector('.control-button').addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        document.querySelector('.control-button').addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>
