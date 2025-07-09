@@ -1,4 +1,4 @@
-print " Control + C to exit Program"
+print("Control + C to exit Program")
 
 import time
 
@@ -15,7 +15,7 @@ GPIO.setup(15, GPIO.OUT)
 GPIO.output(15, GPIO.HIGH)
 
 try:
-  while 1 >=0:
+  while True:  # Python 3 preferred way for infinite loop
     GPIO.output(7, GPIO.LOW)   # turns the first relay switch ON
     time.sleep(.5)             # pauses system for 1/2 second
     GPIO.output(7, GPIO.HIGH)  # turns the first relay switch OFF

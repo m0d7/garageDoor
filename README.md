@@ -29,35 +29,35 @@ Setup Instructions:
 sudo apt-get update
 
 3.  --Next install the Flask Web Server and required packages: 
-sudo apt-get install python-flask
-sudo pip install -r requirements.txt
+sudo apt-get install python3-flask
+sudo apt install python3-pip -y
+sudo pip3 install -r requirements.txt
 
 4.  --Install the GIT application so you can download my Github code: 
 sudo apt-get install git 
 
 5.  --Download my Github code: 
-sudo git clone https://github.com/shrocky2/GarageWeb
+sudo git clone https://github.com/m0d7/garageDoor
  
 6.  --Test out setup and webpage (default port is 5000)
 cd GarageWeb
      --Test Relay connections
-python relaytest.py
+python3 relaytest.py
      --Test Magnetic Reed Switches
-python log.py
+python3 log.py
      --Test out Webpage securely via HTTPS (https://Rasp_Pi_IP_Address:5000)
-python web.py
+python3 web.py
 
 NOTE: The application now uses HTTPS with a self-signed certificate for secure access.
 When first accessing the page, your browser will show a security warning - you'll need to
 accept the self-signed certificate by clicking "Advanced" and then "Proceed" (exact wording
 varies by browser).
 
-
  7.  --To Setup this code to run automatically on system boot up:
 sudo nano /etc/rc.local
      --Add the next 2 lines before the last line "exit 0"
-sudo python /home/pi/GarageWeb/web.py &
-sudo python /home/pi/GarageWeb/log.py &
+sudo python3 /home/pi/GarageWeb/web.py &
+sudo python3 /home/pi/GarageWeb/log.py &
 exit 0
 
 8.  --Change the default password of "12345678"

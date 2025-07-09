@@ -4,12 +4,15 @@ import time
 from datetime import datetime
 
 
-logfile = open("/home/pi/GarageWeb/static/log.txt","a")
+# Use relative path for log file
+log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+os.makedirs(log_dir, exist_ok=True)
+logfile = open(os.path.join(log_dir, "log.txt"), "a")
 logfile.write(datetime.now().strftime("     Program Starting -- %Y/%m/%d -- %H:%M  -- Hello! \n"))
 logfile.close()
 print(datetime.now().strftime("     Program Starting -- %Y/%m/%d -- %H:%M  -- Hello! \n"))
 
-print " Control + C to exit Program"
+print("Control + C to exit Program")
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -23,31 +26,25 @@ DoorOpenTimer = 0  #Default start status turns timer off
 DoorOpenTimerMessageSent = 1  #Turn off messages until timer is started
 
 try:
-        while 1 >= 0:
-         time.sleep(1)
-         if DoorOpenTimer == 1:  #Door Open Timer has Started
-	         currentTimeDate = datetime.strptime(datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S')
-                 if (currentTimeDate - TimeDoorOpened).seconds > 900 and DoorOpenTimerMessageSent == 0:
-                    print "Your Garage Door has been Open for 15 minutes"
-                    DoorOpenTimerMessageSent = 1
-
-         if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:  #Door Status is Unknown
-           logfile = open("/home/pi/GarageWeb/static/log.txt","a")
+        while True:  # Python 3 preferred way for infinite loop
+         time.sleep(1)if DoorOpenTimer == 1:  #Door Open Timer has Started
+             currentTimeDate = datetime.strptime(datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'),'%Y-%m-%d %H:%M:%S')
+             if (currentTimeDate - TimeDoorOpened).seconds > 900 and DoorOpenTimerMessageSent == 0:
+                 print("Your Garage Door has been Open for 15 minutes")
+                 DoorOpenTimerMessageSent = 1         if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:  #Door Status is Unknown
+           logfile = open(os.path.join(log_dir, "log.txt"), "a")
            logfile.write(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
            logfile.close()
-	   print(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
+           print(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
            while GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
              time.sleep(.5)
-           else:
-             if GPIO.input(16) == GPIO.LOW:  #Door is Closed
-                  logfile = open("/home/pi/GarageWeb/static/log.txt","a")
+           else:             if GPIO.input(16) == GPIO.LOW:  #Door is Closed
+                  logfile = open(os.path.join(log_dir, "log.txt"), "a")
                   logfile.write(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Closed \n"))
                   logfile.close()
                   print(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Closed"))
-                  DoorOpenTimer = 0
-
-             if GPIO.input(18) == GPIO.LOW:  #Door is Open
-                  logfile = open("/home/pi/GarageWeb/static/log.txt","a")
+                  DoorOpenTimer = 0             if GPIO.input(18) == GPIO.LOW:  #Door is Open
+                  logfile = open(os.path.join(log_dir, "log.txt"), "a")
                   logfile.write(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Open \n"))
                   logfile.close()
                   print(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Open"))
@@ -58,8 +55,8 @@ try:
 
 
 except KeyboardInterrupt:
-        logfile = open("/home/pi/GarageWeb/static/log.txt","a")
+        logfile = open(os.path.join(log_dir, "log.txt"), "a")
         logfile.write(datetime.now().strftime("     Log Program Shutdown -- %Y/%m/%d -- %H:%M  -- Goodbye! \n"))
         logfile.close()
-	print(datetime.now().strftime("     Log Program Shutdown -- %Y/%m/%d -- %H:%M  -- Goodbye! \n"))
+        print(datetime.now().strftime("     Log Program Shutdown -- %Y/%m/%d -- %H:%M  -- Goodbye! \n"))
         GPIO.cleanup()
