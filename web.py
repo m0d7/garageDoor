@@ -1,7 +1,6 @@
 import time
 from datetime import datetime
 from flask import Flask, render_template, request
-import os
 
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)  # the pin numbers refer to the board connector not the chip
@@ -19,7 +18,6 @@ GPIO.output(7, GPIO.HIGH)
 
 app = Flask(__name__)
 
-# Add a route to handle both HTTP and HTTPS requests
 @app.route('/', methods=['GET', 'POST'])
 def index():
         # This commented out block checks the status of two GPIO pins
@@ -103,16 +101,4 @@ def images(picture):
         return app.send_static_file('images/' + picture)
 
 if __name__ == '__main__':
-        # Path to the SSL certificate and key files
-        cert_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ssl', 'cert.pem')
-        key_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ssl', 'key.pem')
-        
-        # Check if SSL certificates exist
-        if os.path.exists(cert_path) and os.path.exists(key_path):
-                # Run with HTTPS
-                app.run(debug=True, host='0.0.0.0', port=443, ssl_context=(cert_path, key_path))
-        else:
-                print("SSL certificates not found. Running in HTTP mode only.")
-                print("For HTTPS support, create an 'ssl' folder and generate cert.pem and key.pem files.")
-                # Fall back to HTTP
-                app.run(debug=True, host='0.0.0.0', port=5000)
+        app.run(debug=True, host='0.0.0.0', port=5000)

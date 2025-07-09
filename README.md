@@ -21,36 +21,6 @@ Hammer Header & Install Kit on Amazon: https://amzn.to/3b5RbxX
 Hammer Headers on Adafruit: https://www.adafruit.com/product/3662
 
 --------------------------------------------------------------------
-HTTPS Setup Instructions
---------------------------------------------------------------------
-
-The application now supports HTTPS for secure connections. To enable HTTPS:
-
-1. Make sure all dependencies are installed:
-   ```
-   pip3 install -r requirements.txt
-   ```
-
-2. Generate SSL certificates:
-   ```
-   python3 generate_certs.py
-   ```
-
-3. Run the web application:
-   ```
-   python3 web.py
-   ```
-
-4. Access your garage door controller at:
-   - HTTP: http://[raspberry-pi-ip]:5000
-   - HTTPS: https://[raspberry-pi-ip]:443
-
-Note: When accessing via HTTPS, your browser will show a security warning because the certificate is self-signed. 
-You'll need to accept the risk and proceed to the site.
-
-For devices like smartphones, you may need to add an exception for this certificate in your browser settings.
-
---------------------------------------------------------------------
 Setup Instructions:
 --------------------------------------------------------------------
 
