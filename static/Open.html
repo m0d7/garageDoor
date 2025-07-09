@@ -97,12 +97,7 @@
         <div class="door-status">
             <div class="status-text">Vartų Valdymas</div>
         </div>
-        
-        <form action="/Gates" method="post" id="gatesform">
-            <!-- Hidden form for submission -->
-        </form>
-        
-        <button class="control-button" onclick="document.forms['gatesform'].submit();">
+          <button class="control-button" id="gateButton">
             <i class="fas fa-garage-open"></i>
         </button>
         
@@ -113,6 +108,29 @@
     </div>
 
     <script>
+        // Gate control function
+        document.getElementById('gateButton').addEventListener('click', function() {
+            // Visual feedback when clicked
+            this.style.transform = 'scale(0.95)';
+            
+            // Send AJAX request
+            fetch('/Gates', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                // Return to normal size after request completes
+                this.style.transform = 'scale(1)';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Return to normal size even if there's an error
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
         // Add touch feedback
         document.querySelector('.control-button').addEventListener('touchstart', function() {
             this.style.transform = 'scale(0.95)';

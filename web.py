@@ -49,7 +49,10 @@ def Gates():
         time.sleep(1)
         GPIO.output(7, GPIO.HIGH)
         time.sleep(2)
-        return app.send_static_file('Open.html')
+        
+        # Return a simple JSON response instead of redirecting
+        from flask import jsonify
+        return jsonify({"success": True})
 
         # This logic would handle the password check.
         # if name == '12345678':  # 12345678 is the Password that Opens Garage Door (Code if Password is Correct)
