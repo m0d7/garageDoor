@@ -1,0 +1,4 @@
+flask>=2.0.0
+RPi.GPIO>=0.7.0
+pyOpenSSL>=21.0.0
+flask-cors>=3.0.10

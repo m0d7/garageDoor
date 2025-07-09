@@ -28,8 +28,9 @@ Setup Instructions:
 2.  --Lets upgrade the apt-get program: 
 sudo apt-get update
 
-3.  --Next install the Flask Web Server: 
-sudo apt-get install python-flask 
+3.  --Next install the Flask Web Server and required packages: 
+sudo apt-get install python-flask
+sudo pip install -r requirements.txt
 
 4.  --Install the GIT application so you can download my Github code: 
 sudo apt-get install git 
@@ -43,8 +44,13 @@ cd GarageWeb
 python relaytest.py
      --Test Magnetic Reed Switches
 python log.py
-     --Test out Webpage (Rasp_Pi_IP_Address:5000)
+     --Test out Webpage securely via HTTPS (https://Rasp_Pi_IP_Address:5000)
 python web.py
+
+NOTE: The application now uses HTTPS with a self-signed certificate for secure access.
+When first accessing the page, your browser will show a security warning - you'll need to
+accept the self-signed certificate by clicking "Advanced" and then "Proceed" (exact wording
+varies by browser).
 
 
  7.  --To Setup this code to run automatically on system boot up:
